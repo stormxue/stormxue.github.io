@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="stormxue" />
+
+
+
+<meta name="description" content="最近开始使用idea 来写java项目了，这个很流行，相比Eclipse方便了很多。功能多了，相对应的使用的复杂度也较高了，因为网上很多的使用和创建项目的简单教程，都是基于老版本的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Intellij IDEA 搭建maven web项目">
+<meta property="og:url" content="http://stormxue.com/2016/10/02/Intellij IDEA 搭建maven环境/index.html">
+<meta property="og:site_name" content="stormxue">
+<meta property="og:description" content="最近开始使用idea 来写java项目了，这个很流行，相比Eclipse方便了很多。功能多了，相对应的使用的复杂度也较高了，因为网上很多的使用和创建项目的简单教程，都是基于老版本的">
+<meta property="og:image" content="http://oeak9l6dl.bkt.clouddn.com/maven001.png">
+<meta property="og:image" content="http://oeak9l6dl.bkt.clouddn.com/maven002.png">
+<meta property="og:image" content="http://oeak9l6dl.bkt.clouddn.com/maven003.png">
+<meta property="og:image" content="http://oeak9l6dl.bkt.clouddn.com/maven004.png">
+<meta property="og:image" content="http://oeak9l6dl.bkt.clouddn.com/maven005.png">
+<meta property="og:image" content="http://oeak9l6dl.bkt.clouddn.com/maven006.png">
+<meta property="og:image" content="http://oeak9l6dl.bkt.clouddn.com/maven007.png">
+<meta property="og:image" content="http://oeak9l6dl.bkt.clouddn.com/maven008.png">
+<meta property="og:image" content="http://oeak9l6dl.bkt.clouddn.com/maven009%20.png">
+<meta property="og:updated_time" content="2016-10-02T13:05:47.884Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Intellij IDEA 搭建maven web项目">
+<meta name="twitter:description" content="最近开始使用idea 来写java项目了，这个很流行，相比Eclipse方便了很多。功能多了，相对应的使用的复杂度也较高了，因为网上很多的使用和创建项目的简单教程，都是基于老版本的">
+<meta name="twitter:image" content="http://oeak9l6dl.bkt.clouddn.com/maven001.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="stormxue" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Intellij IDEA 搭建maven web项目 | stormxue</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar3.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">stormxue</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">技术源于分享</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:stormxueyuanshuai@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/stormxue/stormxue.github.io" title="GitHub"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/yuanshuaixue" title="CSDN"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注java&#39;(*´∇｀*)</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">stormxue</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar3.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">stormxue</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">技术源于分享</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:stormxueyuanshuai@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/stormxue/stormxue.github.io" title="GitHub"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/yuanshuaixue" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Intellij IDEA 搭建maven环境" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/02/Intellij IDEA 搭建maven环境/" class="article-date">
+      <time datetime="2016-10-02T11:34:35.000Z" itemprop="datePublished">2016-10-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Intellij IDEA 搭建maven web项目
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/java/">java</a><a class="article-category-link" href="/categories/java/maven/">maven</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>　　最近开始使用idea 来写java项目了，这个很流行，相比Eclipse方便了很多。功能多了，相对应的使用的复杂度也较高了，因为网上很多的使用和创建项目的简单教程，都是基于老版本的，每个新版本都有不一样的更行，对于使用小白来说，这个还是很难跟这教程一步一步的走下去，也许因为页面不一样，也许因为入口不一样了，各自各样的不一样都会给小白增加相应的难度。 因为我本身不是java web开发的，所有对于类似我这样的java web小白，再加上idea小白，使用起来就有好多的困难。写这个主要是为了方便自己，希望能顺便给那些和我一样的小白一些帮助吧，废话不多说了，上干货。  </p>
+<h2 id="创建maven项目"><a href="#创建maven项目" class="headerlink" title="创建maven项目"></a>创建maven项目</h2><p>File ——&gt; new ——&gt; Project ——&gt; Maven  (注：Idea中的module就是项目，等同于eclipse的project)<br><img src="http://oeak9l6dl.bkt.clouddn.com/maven001.png" alt="图片001"><br>注意：值得注意的是，这个地方有两个app，选择maven-archetype-webapp,next  </p>
+<ul>
+<li>如下图，填写groupId 和archetypeId<br>网络解释:GroupID是项目组织唯一的标识符，实际对应JAVA的包的结构，是main目录里java的目录结构。<br>ArtifactID就是项目的唯一的标识符，实际对应项目的名称，就是项目根目录的名称。<br>一般来说，包的命名习惯是域名的反过来,加个公司或者个人的名称吧，个人习惯。www.demo.com -&gt; com.richard.demo; 那么都知道，test是项目名称，也是在最后面的，所有项目组的唯一标识符(groupId)：com.richard, 项目的唯一标识符（ArtifactId）demo. 这样你就知道大概对应填些什么东西了。 next<br><img src="http://oeak9l6dl.bkt.clouddn.com/maven002.png" alt="图片002">  </li>
+<li>如下图，这一步，选择你电脑上安装的maven，如果你还没有安装maven请自行去下载安装，maven的安装不包含在此教程中，点击next也可以的，但是可能创建完成之后会下载一些东西，然后导致比较慢，所以我看到写一下。点击有框出来的那个加好，输入对应的name和value，然后点击OK。next.（推荐加一下，我试过，在不加的情况下会生成很慢或直接就失败了，不会生成相关目录）<br>来自网上的解释：<br>archetypeCatalog表示插件使用的archetype元数据，不加这个参数时默认为remote，local，即中央仓库archetype元数据，由于中央仓库的archetype太多了，所以导致很慢，指定internal来表示仅使用内部元数据。<br><img src="http://oeak9l6dl.bkt.clouddn.com/maven003.png" alt="图片003">  </li>
+<li>如下图，填写project name和module name， module name默认和project name 一样的，但是如果这个项目只有这一个module，不改无所谓的，如果有很多的module，那肯定是修改一下咯。<br>在maven管理的project下面，可以有很多个module的子项目。有点类似一个包里面可以有很多个子包（个人是这么类比理解的）。 finish.<br><img src="http://oeak9l6dl.bkt.clouddn.com/maven004.png" alt="图片004">  </li>
+<li>项目结构图：  </li>
+<li>你看这个图中src目录中是却少java文件夹和test文件夹的，需要我们手动创建。<br><img src="http://oeak9l6dl.bkt.clouddn.com/maven005.png" alt="图片005"><br>记得点击一下Import Changes Enable Auto-Import<h2 id="配置tomcat和jdk"><a href="#配置tomcat和jdk" class="headerlink" title="配置tomcat和jdk"></a>配置tomcat和jdk</h2></li>
+<li>然后在右上角点击那个下拉框，再点击Edit Configurations（去设置运行环境）<br><img src="http://oeak9l6dl.bkt.clouddn.com/maven006.png" alt="图片006">  </li>
+<li>点击左上角加号，然后往下滚，找到tomcat server, 然后选择local(选择本地的tomcat)，然后配置，最好配置绿色般的tomcat和电脑安装的jdk<br><img src="http://oeak9l6dl.bkt.clouddn.com/maven007.png" alt="图片007">  </li>
+<li>然后切换到server旁边的Deployment属性框,选择项目，填写访问路径<br><img src="http://oeak9l6dl.bkt.clouddn.com/maven008.png" alt="图片008"> </li>
+<li>好，我们启动tomcat,点击tomcat8右边的小箭头就好了,会自动跳转页面。<br><img src="http://oeak9l6dl.bkt.clouddn.com/maven009%20.png" alt="图片009"><br>终结：这个Intellij IDEA创建maven项目感觉不是那么容易的，我就遇到过创建后不生成相应src目录，启动tomcat无法访问等奇葩问题，解决办法，各种百度，最后成功解决方案是重新多创建几次maven项目，看看各有什么不同。如果在配置tomcat那块发现跟我这不一样，那就有问题了，可能启动不了，或启动成功tomcat但却无法访问项目页面。 </li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/02/Intellij IDEA 搭建maven环境/">Intellij IDEA 搭建maven web项目</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">stormxue</a></p>
+        <p><span>发布时间:</span>2016-10-02, 19:34:35</p>
+        <p><span>最后更新:</span>2016-10-02, 21:05:47</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/02/Intellij IDEA 搭建maven环境/" title="Intellij IDEA 搭建maven web项目">http://stormxue.com/2016/10/02/Intellij IDEA 搭建maven环境/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://stormxue.com/2016/10/02/Intellij IDEA 搭建maven环境/　　作者: stormxue" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/02/hello-world/">
+                    Hello World
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建maven项目"><span class="toc-number">1.</span> <span class="toc-text">创建maven项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置tomcat和jdk"><span class="toc-number">2.</span> <span class="toc-text">配置tomcat和jdk</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Intellij IDEA 搭建maven web项目　| stormxue　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/02/hello-world/" title="下一篇: Hello World">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/02/Intellij IDEA 搭建maven环境/">Intellij IDEA 搭建maven web项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/02/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/30/java反射/">java反射</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 stormxue
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
